@@ -87,7 +87,7 @@ void init_sl(py::module &m)
     m.def("asin", &sl::asin, py::arg("input"));
     m.def("acos", &sl::acos, py::arg("input"));
     m.def("atan", &sl::atan, py::arg("input"));
-    m.def("atan2", &sl::atan2, py::arg("x"), py::arg("y"));
+    m.def("atan2", &sl::atan2, py::arg("y"), py::arg("x"));
     m.def("abs", &sl::abs, py::arg("input"));
     m.def("sqrt", &sl::sqrt, py::arg("input"));
     m.def("log10", &sl::log10, py::arg("input"));
