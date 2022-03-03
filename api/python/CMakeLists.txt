@@ -39,6 +39,7 @@ include_directories(
     ${SPARSELIZARD_SRC}/shapefunction/hierarchical/h1
     ${SPARSELIZARD_SRC}/shapefunction/hierarchical/hcurl
     ${SPARSELIZARD_SRC}/shapefunction/lagrange
+    ${SPARSELIZARD_SRC}/user    
 )
 
 include_directories(${PETSC_DIR}/include ${PETSC_DIR}/${PETSC_ARCH}/include)
@@ -72,6 +73,7 @@ add_library(spylizard SHARED
     src/vec_wrapper.cpp
     src/vectorfieldselect_wrapper.cpp
     src/wallclock_wrapper.cpp
+    src/user_wrapper.cpp
 )
 
 #find_library(SPARSELIZARD_LIBRARY NAMES libsparselizard.so ${SPARSELIZARD_DIR})

@@ -24,6 +24,7 @@ void init_universe(py::module &);
 void init_vec(py::module &);
 void init_vectorfieldselect(py::module &);
 void init_wallclock(py::module &);
+void init_user(py::module &);
 
 
 PYBIND11_MODULE(spylizard, m)
@@ -56,5 +57,6 @@ PYBIND11_MODULE(spylizard, m)
     init_vec(m);
     init_vectorfieldselect(m);
     init_wallclock(m);
+    init_user(m);
 }
 
