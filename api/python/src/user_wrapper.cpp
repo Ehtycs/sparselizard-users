@@ -8,8 +8,11 @@ void init_user(py::module &m)
 {
     m.def("getvecdata", &getvecdata, py::arg("slvector"));
     m.def("setvecdata", &setvecdata, py::arg("slvector"), py::arg("values"));
-    m.def("getcsrdata", &getcsrdata, py::arg("slmat"));
-    m.def("setcsrdata", &setcsrdata, py::arg("slmat"), 
+    m.def("getacsrdata", &getacsrdata, py::arg("slmat"));
+    m.def("setacsrdata", &setacsrdata, py::arg("slmat"), 
           py::arg("rowi"), py::arg("coli"), py::arg("vals"));
+    m.def("getdcsrdata", &getdcsrdata, py::arg("slmat"));
+    m.def("setdcsrdata", &setdcsrdata, py::arg("slmat"), 
+          py::arg("rowi"), py::arg("coli"), py::arg("vals"));          
 }
 
