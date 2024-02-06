@@ -8,11 +8,19 @@ void init_sl(py::module &m)
     m.def("setmaxnumthreads", &sl::setmaxnumthreads, py::arg("mnt"));
     m.def("getmaxnumthreads", &sl::getmaxnumthreads);
 
+    m.def("getx", &sl::getx);
+    m.def("gety", &sl::gety);
+    m.def("getz", &sl::getz);
+
     m.def("getpi", &sl::getpi);
+    
+    m.def("getmu0", &sl::getmu0);
+    m.def("getepsilon0", &sl::getepsilon0);
+    
     m.def("getrandom", &sl::getrandom);
 
     m.def("selectunion", &sl::selectunion, py::arg("physregs"));
-    m.def("selectintersection", &sl::selectintersection, py::arg("physregs"));
+    m.def("selectintersection", &sl::selectintersection, py::arg("physregs"), py::arg("intersectdim"));
     m.def("selectall", &sl::selectall);
 
     m.def("isdefined", &sl::isdefined, py::arg("physreg"));
@@ -76,10 +84,13 @@ void init_sl(py::module &m)
     m.def("dy", &sl::dy, py::arg("input"));
     m.def("dz", &sl::dz, py::arg("input"));
 
-    m.def("dt", &sl::dt, py::arg("input"));
-    m.def("dtdt", &sl::dtdt, py::arg("input"));
+    m.def("dt", static_cast<expression (*)(expression)>(&sl::dt), py::arg("input"));
+    m.def("dtdt", static_cast<expression (*)(expression)>(&sl::dtdt), py::arg("input"));
     m.def("dtdtdt", &sl::dtdtdt, py::arg("input"));
     m.def("dtdtdtdt", &sl::dtdtdtdt, py::arg("input"));
+    
+    m.def("dt", static_cast<expression (*)(expression, double, double)>(&sl::dt), py::arg("input"), py::arg("initdt"), py::arg("initdtdt"));
+    m.def("dtdt", static_cast<expression (*)(expression, double, double)>(&sl::dtdt), py::arg("input"), py::arg("initdt"), py::arg("initdtdt"));
 
     m.def("sin", &sl::sin, py::arg("input"));
     m.def("cos", &sl::cos, py::arg("input"));
@@ -90,7 +101,7 @@ void init_sl(py::module &m)
     m.def("atan2", &sl::atan2, py::arg("y"), py::arg("x"));
     m.def("abs", &sl::abs, py::arg("input"));
     m.def("sqrt", &sl::sqrt, py::arg("input"));
-    m.def("log10", &sl::log10, py::arg("input"));
+    m.def("log", &sl::log, py::arg("input"));
     m.def("exp", &sl::exp, py::arg("input"));
     m.def("pow", &sl::pow, py::arg("base"), py::arg("exponent"));
     m.def("mod", &sl::mod, py::arg("input"), py::arg("modval"));
@@ -128,6 +139,7 @@ void init_sl(py::module &m)
 
     m.def("crossproduct", &sl::crossproduct, py::arg("a"), py::arg("b"));
     m.def("doubledotproduct", &sl::doubledotproduct, py::arg("a"), py::arg("b"));
+    m.def("elementwiseproduct", &sl::elementwiseproduct, py::arg("a"), py::arg("b"));
     m.def("trace", &sl::trace, py::arg("a"));
 
     m.def("integral", static_cast<integration (*)(int, expression, int, int)>(&sl::integral), py::arg("physreg"), py::arg("tointegrate"), py::arg("integrationorderdelta")=0, py::arg("blocknumber")=0);
